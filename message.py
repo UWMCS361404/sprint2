@@ -1,24 +1,23 @@
 import datetime
+from user import User
 from google.appengine.ext import ndb
 
 class Message(ndb.Model):
 
-    rName = ndb.StringProperty()
-    sName = ndb.StringProperty()
     time = ndb.DateTimeProperty()
     content = ndb.StringProperty()
     
-    def setrName(self, rName):
-        self.rName = rName
-    
-    def getrName(self):
-        return self.rName
+    def setSender(self, sender):
+        self.sender = sender
         
-    def setsName(self, sName):
-        self.sName = sName
+    def getSender(self):
+        return self.sender
         
-    def getsName(self):
-        return self.sName
+    def setReceiver(self, receiver):
+        self.receiver = receiver
+        
+    def getReceiver(self):
+        return self.receiver
         
     def setTime(self, time):
         self.time = time
