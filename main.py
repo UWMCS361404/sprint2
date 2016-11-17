@@ -40,6 +40,8 @@ class Login(webapp2.RequestHandler):
             self.redirect("/")
         
         if validAcc == True:
+        
+            self.response.set_cookie("loginName", uNm, max_age=360, path="/")
             self.redirect("/messcenter?user="+uNm)
 
 class MessCenter(webapp2.RequestHandler):
@@ -56,14 +58,18 @@ class MessCenter(webapp2.RequestHandler):
     
     def post(self):
         student = self.request.get("studentName")
-        self.redirect("/chat?student=" + student +"?instr=" + self.request.get("user"))
+        self.redirect("/chat?student=" + student);
 
 class Chat(webapp2.RequestHandler):
     def get(self):
         template = JINJA_ENVIRONMENT.get_template('chat.html')
         
+        student = self.request.get("student")
+        user = self.request.cookies.get("loginName")
+        
         template_values = {
-            'Test': 'tst'
+            "user": user,
+            "student": student
         }
         
         self.response.write(template.render(template_values))
@@ -77,4 +83,4 @@ app = webapp2.WSGIApplication([
 	('/chat', Chat)
 ], debug=True)
 
-userList = parseTxt("accounts.csv")
+userList = parseTxt("accounts.csv")	#r = newR;
