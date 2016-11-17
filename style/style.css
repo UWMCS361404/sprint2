@@ -19,6 +19,11 @@ hr {
 	border-top: 1px solid black;
 }
 
+.login{
+    font-family: helvetica;
+    text-align: center;
+}
+
 .chatArea{
 	margin-left: 27.5%;
 	padding: .2%;
@@ -174,45 +179,4 @@ textarea::-moz-selection, form::-moz-selection{
 	color:white;
 	background-color: black;
 }
-
-
-
-
-
-/*h1, h2, h3, h4, h5, h6{
-    font-family: helvetica;
-    text-align: center;
-}
-
-head{
-    color: white;
-}
-
-body{
-  background-color: lightgrey;
-}
-
-.Student{
-    background-color: yellow;
-    width: 300px;
-    border: 5px solid lightskyblue;
-    padding: 5px;
-    margin : 25px;
-}
-
-.Instructor{
-    float: right;
-    padding: 0px 100px 0px 0px;
-    text-align: right;
-    background-color: lightskyblue;
-    width: 300px;
-    border: 5px solid yellow;
-    padding: 5px;
-    margin : 25px;
-}
-
-.timestamp{
-    background-color: red;
-}
-*/
 

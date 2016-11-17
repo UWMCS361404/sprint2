@@ -11,15 +11,6 @@
 
 {% for item in userList%}
 {% if item.getaType() == "i\r\n" and item.getName() == user%}
-
-Which class?
-<form>
-<input type = "radio" name ="class"> CS361
-<input type = "radio" name ="class"> CS250
-<input type = "radio" name ="class"> CS337
-<input type = "radio" name ="class"> CS423
-</form>
-
 Which user would you like to converse with:
 
 <form action="messcenter" method="post">
@@ -31,7 +22,7 @@ Which user would you like to converse with:
 <input type="submit">
 </form>
 
-{% endif%}
+{% endif %}
 {% endfor %}
 
 </body>

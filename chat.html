@@ -9,7 +9,7 @@ FAQit Web App Chat
 <h1>FAQit Chat Client</h1>
 <hr>
 <p>
-Your Chat History With: 
+{{user}}'s Chat History With: {{student}}
 </p>
 
 <div class="chatArea">
@@ -54,10 +54,10 @@ That will be on the test<hr>
 </div>
 
 <p>
-<form>
-<textarea  name="message" placeholder="Ask New Question">
+<form action="chat" method="post">
+<textarea name="message" placeholder="Ask New Question">
 </textarea><br>
-<input type="submit" value="Send" name="SendMessage"/>
+<input type="submit" value="Send"/>
 </form>
 </p>
 
