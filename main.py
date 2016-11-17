@@ -74,8 +74,12 @@ class Chat(webapp2.RequestHandler):
         
         self.response.write(template.render(template_values))
         
-    def post(self):
-        pass
+    def post(self):    
+        user = self.request.cookies.get("loginName")
+        
+        
+        
+        self.redirect("/messcenter?user=" + user + "&" + "message=" + self.request.get("message"));
 
 app = webapp2.WSGIApplication([
 	('/', Login),
@@ -83,4 +87,4 @@ app = webapp2.WSGIApplication([
 	('/chat', Chat)
 ], debug=True)
 
-userList = parseTxt("accounts.csv")	#r = newR;
+userList = parseTxt("accounts.csv")
