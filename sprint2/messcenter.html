@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>    
+<head>
+<link rel="stylesheet" type="text/css" href="style/style.css">
+<title>FAQit Login Page</title>
+</head>
+
+<body>
+<h1>FAQit Messaging Client</h1>
+<h3>Hello, {{user}}!</h3>
+
+{% for item in userList%}
+{% if item.getaType() == "i\r\n" and item.getName() == user%}
+Which user would you like to converse with:
+
+<form action="messcenter" method="post">
+{% for student in userList %}
+    {% if student.getName() != user%}
+        <input type="radio" name="studentName" value={{student.getName()}} required> {{student.getName()}}<br>
+    {% endif %}
+{% endfor %}
+<input type="submit">
+</form>
+
+{% endif %}
+{% endfor %}
+
+</body>
+</html>
