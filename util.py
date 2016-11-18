@@ -10,22 +10,22 @@ def parseTxt(name):
     
     while st != "":
         if st[:st.find(",")] not in result:
-            user = User()
-            user.setName(st[:st.find(",")])
+
+            uName = st[:st.find(",")]
             
             st = st[st.find(",") + 1:]
-            user.setPwd(st[:st.find(",")])
+            password = st[:st.find(",")]
             
             st = st[st.find(",") + 1:]
-            user.setaType(st)
+            accnt = st
             
+            user = User(aType=accnt, pwd=password, name=uName)
             result.append(user)
             st = f.readline()
-        
+    
     return result
 
 def getAccount(userName):
-    
     for i in range(len(userList)):
         if i.getName() == userName:
             return i
