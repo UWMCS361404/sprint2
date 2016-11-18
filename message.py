@@ -3,9 +3,10 @@ from user import User
 from google.appengine.ext import ndb
 
 class Message(ndb.Model):
-
     time = ndb.DateTimeProperty()
     content = ndb.StringProperty()
+    
+    sender = User(aType="i", name="rock")
     
     def setSender(self, sender):
         self.sender = sender

@@ -1,9 +1,10 @@
 class User:
-    def __init__(self):
-        self.name = ''
-        self.pwd = ''
-        self.aType = ''
-        self.classList = []
+    def __init__(self, name="", pwd="", aType=""):
+        self.name = name
+        self.pwd = pwd
+        self.aType = aType
+        #self.classList = []
+        #self.className = StringProperty()
 
     def setName(self, name):
         self.name = name

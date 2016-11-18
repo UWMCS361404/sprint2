@@ -3,11 +3,11 @@ from user import User
 from google.appengine.ext import ndb
 
 class Question(ndb.Model):
-    
     owner = User
     topic = ndb.StringProperty()
     answered = ndb.BooleanProperty();
     messages = []
+    className = "CS361" # Hard coded for now
     
     def setOwner(self, owner):
         self.owner = owner
@@ -35,4 +35,5 @@ class Question(ndb.Model):
         
     def getMessages(self):
         return self.messages
-        
+    
+    

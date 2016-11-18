@@ -38,15 +38,15 @@ class Login(webapp2.RequestHandler):
         
         if validAcc == True:
         
-            self.response.set_cookie("loginName", uNm, max_age=360, path="/")
+            self.response.set_cookie("CurrentUser", uNm, max_age=360, path="/")
             self.redirect("/messcenter?user="+uNm)
 
 class MessCenter(webapp2.RequestHandler):
     def get(self):
         template = JINJA_ENVIRONMENT.get_template('messcenter.html')
         
-        messages = list(Message.query())
         uNm = self.request.get("user")
+        
         template_values = {
             "user": uNm,
             "userList": userList,
@@ -56,26 +56,27 @@ class MessCenter(webapp2.RequestHandler):
     
     def post(self):
         student = self.request.get("studentName")
-        self.redirect("/chat?student=" + student);
+        self.redirect("/chat?student=" + student)
 
 class Chat(webapp2.RequestHandler):
     def get(self):
         template = JINJA_ENVIRONMENT.get_template('chat.html')
         
         student = self.request.get("student")
-        user = self.request.cookies.get("loginName")
+        user = self.request.cookies.get("CurrentUser")
         messages = list(Message.query())
         
         template_values = {
             "user": user,
             "student": student,
-            "messages": messages
+            "messages": messages,
+            "size": len(messages)
         }
         
         self.response.write(template.render(template_values))
         
     def post(self):    
-        user = self.request.cookies.get("loginName")
+        user = self.request.cookies.get("CurrentUser")
         
         message = Message(time=datetime.datetime.now(), content=self.request.get("message"));
         message.setSender(getAccount(user))
@@ -84,7 +85,6 @@ class Chat(webapp2.RequestHandler):
         message.put()
         
         self.redirect("/messcenter?user=" + user)
-        #self.redirect("/messcenter?user=" + user + "&" + "message=" + self.request.get("message"));
 
 app = webapp2.WSGIApplication([
 	('/', Login),
