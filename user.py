@@ -23,5 +23,11 @@ class User:
     def getaType(self):
         return self.aType
         
+    def setclassList(self, list):
+        self.classList = list
+        
+    def getclassList(self):
+        return self.classList
+        
     def toString(self):
         return str(name) + "," + str(pwd) + "," + str(aType)
