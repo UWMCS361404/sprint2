@@ -1,16 +1,17 @@
 import webapp2
 import jinja2
 import os
+import datetime
 
+from google.appengine.ext import ndb
 from user import User
-from util import parseTxt
+from util import *
+from message import Message
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
 autoescape=True)
-
-userList = []
 
 class Login(webapp2.RequestHandler):
     def get(self):
@@ -30,10 +31,6 @@ class Login(webapp2.RequestHandler):
         
         for item in userList:
             if item.getName() == uNm and item.getPwd() == uPwd:
-                #print(repr(item.getaType())) # Note that the function, repr shows white space characters. I'm not sure where the \r\n is coming from, but this works for now
-                #print(item.getaType() == "'ui")
-                #if item.getaType() == "i\r\n":
-                #    print("Instr")
                 validAcc = True
         
         if validAcc == False:
@@ -48,10 +45,11 @@ class MessCenter(webapp2.RequestHandler):
     def get(self):
         template = JINJA_ENVIRONMENT.get_template('messcenter.html')
         
+        messages = list(Message.query())
         uNm = self.request.get("user")
         template_values = {
             "user": uNm,
-            "userList": userList
+            "userList": userList,
         }
         
         self.response.write(template.render(template_values))
@@ -66,10 +64,12 @@ class Chat(webapp2.RequestHandler):
         
         student = self.request.get("student")
         user = self.request.cookies.get("loginName")
+        messages = list(Message.query())
         
         template_values = {
             "user": user,
-            "student": student
+            "student": student,
+            "messages": messages
         }
         
         self.response.write(template.render(template_values))
@@ -77,9 +77,14 @@ class Chat(webapp2.RequestHandler):
     def post(self):    
         user = self.request.cookies.get("loginName")
         
+        message = Message(time=datetime.datetime.now(), content=self.request.get("message"));
+        message.setSender(getAccount(user))
+        message.setReceiver(self.request.get("student"));
         
+        message.put()
         
-        self.redirect("/messcenter?user=" + user + "&" + "message=" + self.request.get("message"));
+        self.redirect("/messcenter?user=" + user)
+        #self.redirect("/messcenter?user=" + user + "&" + "message=" + self.request.get("message"));
 
 app = webapp2.WSGIApplication([
 	('/', Login),

@@ -1,5 +1,7 @@
 from user import User
 
+userList = []
+
 def parseTxt(name):
     f = open(name,"r")
     st = f.readline()
@@ -21,4 +23,11 @@ def parseTxt(name):
             st = f.readline()
         
     return result
+
+def getAccount(userName):
     
+    for i in range(len(userList)):
+        if i.getName() == userName:
+            return i
+            
+    return None
