@@ -14,23 +14,25 @@ FAQit Web App Chat
 
 <div class="chatArea">
     {% for message in messages %}
-    
         {% if message.getSender().getaType() == "i" %}
-            <div class="iMessage">
-            <div class="messageMeta">{{message.getSender().getName()}}<hr></div>
-            {{message.getContent()}}<hr>
-            <div class="messageMeta">{{message.getTime()}}</div>
-            </div>
+            {% if message.getSender().getName() == user or message.getReceiver().getName() == user%}
+                <div class="iMessage">
+                <div class="messageMeta"> {{message.getSender().getName()}}</div>
+                <hr>{{message.getContent()}}<hr>
+                <div class="messageMeta">{{message.getTime()}}</div>
+                </div>
+            {% endif %}
         {% endif %}
         
-        {% if message.getSender().getaType() == "s" %}
-            <div class="sMessage">
-            <div class="messageMeta">{{message.getSender().getName()}}<hr></div>
-            {{message.getContent()}}<hr>
-            <div class="messageMeta">{{message.getTime()}}</div>
-            </div>
+        {% if message.getSender().getaType() == "s"%}
+            {% if message.getSender().getName() == user or message.getReceiver().getName() == user%}
+                <div class="sMessage">
+                <div class="messageMeta"> {{message.getSender().getName()}}</div>
+                <hr>{{message.getContent()}}<hr>
+                <div class="messageMeta">{{message.getTime()}}</div>
+                </div>
+            {% endif %}
         {% endif %}
-        
     {% endfor %}
 </div>
 
@@ -43,7 +45,7 @@ FAQit Web App Chat
 </p>
 
 <p>
-Total number of messages(Between {{user}} {{student}}): {{size}}<br>
+Total number of messages(Between {{user}} and {{student}}): {{size}}<br>
 <hr>
 </p>
 

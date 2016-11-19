@@ -1,4 +1,4 @@
-from user import User
+from user import *
 
 userList = []
 
@@ -11,23 +11,22 @@ def parseTxt(name):
     while st != "":
         if st[:st.find(",")] not in result:
 
-            uName = st[:st.find(",")]
+            uName = st[:st.find(",")].strip()
             
             st = st[st.find(",") + 1:]
-            password = st[:st.find(",")]
+            password = st[:st.find(",")].strip()
             
             st = st[st.find(",") + 1:]
-            accnt = st
+            accnt = st.strip()
             
             user = User(aType=accnt, pwd=password, name=uName)
+            user.put()
             result.append(user)
             st = f.readline()
     
     return result
 
-def getAccount(userName):
-    for i in range(len(userList)):
-        if i.getName() == userName:
-            return i
-            
-    return None
+def getAccount(userName, uList):
+    for i in range(len(uList)):
+        if userName.strip() == uList[i].getName().strip():
+            return uList[i]
