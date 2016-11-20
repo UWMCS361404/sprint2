@@ -19,7 +19,8 @@ FAQit Web App Chat
                 <div class="iMessage">
                 <div class="messageMeta"> {{message.getSender().getName()}}</div>
                 <hr>{{message.getContent()}}<hr>
-                <div class="messageMeta">{{message.getTime()}}</div>
+                <div class="messageMeta">{{message.getTime().month}} {{message.getTime().day}}, {{message.getTime().year}}<br>
+                {{message.getTime().hour}}:{{message.getTime().minute}}</div>
                 </div>
             {% endif %}
         {% endif %}
@@ -29,7 +30,8 @@ FAQit Web App Chat
                 <div class="sMessage">
                 <div class="messageMeta"> {{message.getSender().getName()}}</div>
                 <hr>{{message.getContent()}}<hr>
-                <div class="messageMeta">{{message.getTime()}}</div>
+                <div class="messageMeta">{{message.getTime().month}} {{message.getTime().day}}, {{message.getTime().year}}<br>
+                {{message.getTime().hour}}:{{message.getTime().minute}}</div>
                 </div>
             {% endif %}
         {% endif %}
@@ -45,7 +47,7 @@ FAQit Web App Chat
 </p>
 
 <p>
-Total number of messages(Between {{user}} and {{student}}): {{size}}<br>
+
 <hr>
 </p>
 

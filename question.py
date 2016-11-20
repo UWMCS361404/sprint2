@@ -1,5 +1,4 @@
 from user import User
-from user import User
 from google.appengine.ext import ndb
 
 class Question(ndb.Model):
