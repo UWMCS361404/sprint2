@@ -75,7 +75,7 @@ div.iMessage + div.iMessage{
  * Double check that this actually works.  At the moment the HTML is hard coded
  */
 div.sMessage + div.sMessage{
-	clear: right;
+	clear: left;
 	margin-top: 1%;
 	margin-bottom: 1%;
 }

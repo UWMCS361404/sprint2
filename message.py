@@ -1,18 +1,35 @@
 import datetime
-from user import User
+from user import *
+from util import *
 from google.appengine.ext import ndb
 
 class Message(ndb.Model):
     time = ndb.DateTimeProperty()
     content = ndb.StringProperty()
-    
-    sender = User(aType="i", name="rock")
+    sender = ndb.StructuredProperty(User)
+    receiver = ndb.StructuredProperty(User)
     
     def setSender(self, sender):
         self.sender = sender
         
     def getSender(self):
+        return self.getSender()
+        
+    def setReceiver(self, receiver):
+        self.receiver = receiver
+        
+    def getReceiver(self, receiver):
+        return self.getreceiver
+        
+    def getSender(self):
         return self.sender
+        
+    def messagesWith(self, user):
+        query = Message.query()
+        
+    def messagesFrom(self, user):
+        query = Message.query()
+        return (list(query.filter(Message.sender == user)))
         
     def setReceiver(self, receiver):
         self.receiver = receiver

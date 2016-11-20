@@ -1,8 +1,14 @@
-class User:
-    def __init__(self, name="", pwd="", aType=""):
-        self.name = name
-        self.pwd = pwd
-        self.aType = aType
+from google.appengine.ext import ndb
+
+class User(ndb.Model):
+    name = ndb.StringProperty()
+    pwd = ndb.StringProperty()
+    aType = ndb.StringProperty()
+    
+    #def __init__(self, name="", pwd="", aType=""):
+    #    self.name = name
+    #    self.pwd = pwd
+    #    self.aType = aType
         #self.classList = []
         #self.className = StringProperty()
 

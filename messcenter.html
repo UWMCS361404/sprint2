@@ -9,20 +9,25 @@
 <h1>FAQit Messaging Client</h1>
 <h3>Hello, {{user}}!</h3>
 
-{% for item in userList%}
-{% if item.getaType() == "i\r\n" and item.getName() == user%}
-Which user would you like to converse with:
-
-<form action="messcenter" method="post">
-{% for student in userList %}
-    {% if student.getName() != user%}
-        <input type="radio" name="studentName" value={{student.getName()}} required> {{student.getName()}}<br>
+{% for item in userList %}
+    {% if item.getaType() == "i" and item.getName() == user%}
+        Which user would you like to converse with:
+        
+        <form action="messcenter" method="post">
+        {% for student in userList %}
+            {% if student.getName() != user%}
+                <input type="radio" name="studentName" value={{student.getName()}} required> {{student.getName()}}<br>
+            {% endif %}
+        {% endfor %}
+        <input type="submit">
+        </form>
     {% endif %}
-{% endfor %}
-<input type="submit">
-</form>
-
-{% endif %}
+    
+    {% if item.getaType() == "s" and item.getName() == user%}
+        <form action"messcenter" method="post">
+            <input type ="submit" value ="Go To Chat">
+        </form>
+    {% endif %}
 {% endfor %}
 
 </body>

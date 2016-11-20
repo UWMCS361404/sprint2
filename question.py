@@ -4,10 +4,10 @@ from google.appengine.ext import ndb
 
 class Question(ndb.Model):
     owner = User
-    topic = ndb.StringProperty()
+    topic = Message()
     answered = ndb.BooleanProperty();
     messages = []
-    className = "CS361" # Hard coded for now
+    lec = "CS361" # Hard coded for now
     
     def setOwner(self, owner):
         self.owner = owner
@@ -36,4 +36,12 @@ class Question(ndb.Model):
     def getMessages(self):
         return self.messages
     
+    def getTime(self):
+        return self.topic.getTime()
+    
+    def getLatest(self):
+        if len(messages) == 0:
+            return getTime()
+            
+        return messages[len(messages) - 1].getTime()
     
