@@ -30,3 +30,11 @@ def getAccount(userName, uList):
     for i in range(len(uList)):
         if userName.strip() == uList[i].getName().strip():
             return uList[i]
+
+def getInstrAccount(uList):
+    for i in range(len(uList)):
+        if uList[i].getaType() == "i":
+            return uList[i]
+    
+    
+    

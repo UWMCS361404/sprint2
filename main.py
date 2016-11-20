@@ -20,7 +20,7 @@ class Login(webapp2.RequestHandler):
         template_values = {
             'Test': 'tst'
         }
-        
+
         self.response.write(template.render(template_values))
         
     def post(self):
@@ -63,25 +63,31 @@ class Chat(webapp2.RequestHandler):
         
         student = self.request.get("student")
         user = self.request.cookies.get("CurrentUser")
+        
+        if student == "":
+            student = getInstrAccount(userList).getName()
+            
+        #print("\n\t\t This is the student: " + repr(str(student)))
         self.response.set_cookie("receiver", student, max_age=360, path="/")
-        
+        # {% if message.getSender().getName() == user or message.getReceiver().getName() == student %}
         messages = list(Message.query())
-        
-        message = Message()
-
+        print("\n\t\t" + student)
         template_values = {
             "user": user,
             "student": student,
             "messages": messages,
-            "size": len(messages)
+            "size": len(messages)  
         }
-        
+
         self.response.write(template.render(template_values))
         
     def post(self):
         user = self.request.cookies.get("CurrentUser")
-        message = Message(time=datetime.datetime.now(), content=self.request.get("message"), sender=getAccount(user, userList), receiver=getAccount(self.request.cookies.get("receiver"), userList))
 
+        message = Message(time=datetime.datetime.now(), content=self.request.get("message"), sender=getAccount(user, userList), receiver=getAccount(self.request.cookies.get("receiver"), userList))
+        
+        print(getAccount(self.request.cookies.get("receiver"), userList))
+        print(message.getReceiver())
         message.put()
         
         self.redirect("/messcenter?user=" + user)

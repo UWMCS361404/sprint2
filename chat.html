@@ -15,7 +15,7 @@ FAQit Web App Chat
 <div class="chatArea">
     {% for message in messages %}
         {% if message.getSender().getaType() == "i" %}
-            {% if message.getSender().getName() == user or message.getReceiver().getName() == user%}
+            {% if message.getReceiver().getName() == student or message.getReceiver().getName() == user%}
                 <div class="iMessage">
                 <div class="messageMeta"> {{message.getSender().getName()}}</div>
                 <hr>{{message.getContent()}}<hr>
@@ -25,7 +25,7 @@ FAQit Web App Chat
         {% endif %}
         
         {% if message.getSender().getaType() == "s"%}
-            {% if message.getSender().getName() == user or message.getReceiver().getName() == user%}
+           {% if message.getSender().getName() == user or message.getSender().getName() == student%}
                 <div class="sMessage">
                 <div class="messageMeta"> {{message.getSender().getName()}}</div>
                 <hr>{{message.getContent()}}<hr>
