@@ -4,6 +4,8 @@ import os
 
 from user import User
 from util import parseTxt
+from question import Question
+from message import Message
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -25,7 +27,7 @@ class Login(webapp2.RequestHandler):
 
 
         else:
-            if (getAccount(uNm).aType = 's'):
+            if (getAccount(uNm).aType == 's'):
                 self.redirect('/studentcenter')
             else:
                 self.redirect('/instructorcenter')
@@ -45,7 +47,7 @@ class Login(webapp2.RequestHandler):
         if validAcc == True:
             #self.response.set_cookie('name', name, path='/')
             self.response.set_cookie("CurrentUser", uNm, max_age=360, path="/")
-            if (getAccount(uNm).aType = 's'):
+            if (getAccount(uNm).aType == 's'):
                 self.redirect("/studentcenter")
             else:
                 self.redirect("/instructorcenter")
@@ -56,36 +58,36 @@ class Login(webapp2.RequestHandler):
 
 class InstructorCenter(webapp2.RequestHandler):
 
-    QL = Question.query(Question.lec=getAccount(uNm).lec).fetch()
+    QL = Question.query(Question.lec==getAccount(uNm).lec).fetch()
 
     def get(self):
         uNm = self.request.cookies.get('CurrentUser')
-        QL = Question.query(Question.lec=getAccount(uNm).lec).fetch()
+        QL = Question.query(Question.lec==getAccount(uNm).lec).fetch()
         template = JINJA_ENVIRONMENT.get_template('instructorcenter.html')
         uNm = self.request.get("CurrentUser")
         template_values = {
-            "CurrentUser" = uNm,
-            'QL' = QL,
+            "CurrentUser": uNm,
+            'QL': QL,
         }
 
     def post(self):
         time = datetime.datetime.now()
         uNm = self.request.cookies.get('CurrentUser')
 
-    def goToChat(self):
-
-        template_values = {
-            'user'
-        }
-
-
+    # def goToChat(self):
+    #
+    #     template_values = {
+    #         'user'
+    #     }
 
 
 
 
-class StudentCenter(webapp2.RequestHandler):
-    def get(self):
-    def post(self):
+
+
+# class StudentCenter(webapp2.RequestHandler):
+#     def get(self):
+#     def post(self):
 
 
 class Chat(webapp2.RequestHandler):
@@ -120,7 +122,7 @@ class Chat(webapp2.RequestHandler):
         self.redirect("/messcenter?user=" + user)
 
 class Test(webapp2.RequestHandler):
-    def get(self)
+    def get(self):
         template = JINJA_ENVIRONMENT.get_template('test.html')
         test1 = "test 1, make sure this is running"
         test2 = "test 2, and loading template vals"
@@ -132,7 +134,7 @@ class Test(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
 	('/', Login),
-    ('/studentcenter'), StudentCenter),
+#    ('/studentcenter'), StudentCenter),
     ('/instructorcenter'), InstructorCenter,
 	('/test', Test),
 	('/chat', Chat)

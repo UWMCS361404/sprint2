@@ -1,7 +1,6 @@
 from user import User
-from user import User
 from google.appengine.ext import ndb
-
+from message import Message
 class Question(ndb.Model):
 
     owner = User

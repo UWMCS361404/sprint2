@@ -17,7 +17,7 @@ class Message(ndb.Model):
 
     def setReceiver(self, receiver):
         self.receiver = receiver
-        
+
     def getReceiver(self, receiver):
         return self.getreceiver
 
@@ -48,5 +48,3 @@ class Message(ndb.Model):
 
     def getContent(self):
         return self.content
-Contact GitHub API Training Shop Blog About
-© 2016 GitHub, Inc. Terms Privacy Security Status Help
