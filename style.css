@@ -1,0 +1,68 @@
+#previous_questions{
+    
+    position: absolute;
+    left: 10%;
+    top: 10%;
+}
+
+#new_question{
+    
+    position: absolute;
+    left: 60%;
+    top: 10%;
+}
+
+#gotoFAQ{
+    
+    position: absolute;
+    top: 50%;
+    left: 40%;
+}
+
+#list_of_questions{
+    
+    position: absolute;
+    left: 10%;
+    top: 12%;
+    width: 18%;
+    height: 20%;
+    overflow: scroll;
+}
+
+body {
+    background-image: url("wallpapersprint.png");
+}
+
+#something{
+    height: 200px;
+    width: 400px;
+    margin: 230px 0 0 500px;
+    top: 50%;
+    left: 50%;
+}
+
+.txtsize {
+    width: 175px;
+    height: 25px
+}
+
+.loginbut{
+    font-size: 20px;
+}
+
+#loginplace{
+    height: 200px;
+    width: 400px;
+    margin: 10px 0 0 205px;
+    top: 50%;
+    left: 50%;
+}
+
+#err{
+    height: 100px;
+    width: 400px;
+    margin: 50px 0 0 500px;
+    top: 50%;
+    left: 50%;
+}
+
