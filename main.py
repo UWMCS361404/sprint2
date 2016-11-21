@@ -89,12 +89,28 @@ class Chat(webapp2.RequestHandler):
         message.put()
         
         self.redirect("/messcenter?user=" + user)
+        
+class Faq(webapp2.RequestHandler):
+    def get(self): 
+        template = JINJA_ENVIRONMENT.get_template('faq.html')
+        user = self.request.cookies.get("CurrentUser")
+        
+        template_values = {
+            "user": user            
+        }
+        
+        self.response.write(template.render(template_values))
+        
+    def post(self):
+        user = self.request.cookies.get("CurrentUser")
+        self.redirect("/messcenter?user=" + user)
+        
 
 userList = parseTxt("accounts.csv")
 
 app = webapp2.WSGIApplication([
 	('/', Login),
 	('/messcenter', MessCenter),
-	('/chat', Chat)
+	('/chat', Chat),
+	('/faq', Faq)
 ], debug=True)
-
