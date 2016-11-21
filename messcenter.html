@@ -19,17 +19,12 @@
                 <input type="radio" name="studentName" value={{student.getName()}} required> {{student.getName()}}<br>
             {% endif %}
         {% endfor %}
-        <input type="submit">
-        </form>
-    {% endif %}
-    
-    {% if item.getaType() == "s" and item.getName() == user%}
-        <form action"messcenter" method="post">
-            <input type ="submit" value ="Go To Chat">
-        </form>
     {% endif %}
 {% endfor %}
 
+<form action"messcenter" method="post">
+    <input type ="submit" value ="Go To Chat">
+</form>
 <form action="faq" method="get">
     <input type="submit" value ="Go To FAQ">
 </form>
