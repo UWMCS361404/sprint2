@@ -1,7 +1,9 @@
 import webapp2
 import jinja2
 import os
+import time
 import datetime
+import calendar
 
 from google.appengine.ext import ndb
 from user import *
@@ -28,7 +30,7 @@ class Login(webapp2.RequestHandler):
         uPwd = self.request.get('uPass')
         
         validAcc = False
-        
+
         for item in userList:
             if item.getName() == uNm.strip() and item.getPwd().strip() == uPwd:
                 validAcc = True
@@ -67,18 +69,16 @@ class Chat(webapp2.RequestHandler):
         if student == "":
             student = getInstrAccount(userList).getName()
             
-        #print("\n\t\t This is the student: " + repr(str(student)))
         self.response.set_cookie("receiver", student, max_age=360, path="/")
-        # {% if message.getSender().getName() == user or message.getReceiver().getName() == student %}
-        messages = list(Message.query())
-        print("\n\t\t" + student)
+        messages = list(Message.query().order(Message.time, -Message.time))
+
         template_values = {
             "user": user,
             "student": student,
             "messages": messages,
-            "size": len(messages)  
+            "size": len(messages)
         }
-
+        
         self.response.write(template.render(template_values))
         
     def post(self):
@@ -86,8 +86,6 @@ class Chat(webapp2.RequestHandler):
 
         message = Message(time=datetime.datetime.now(), content=self.request.get("message"), sender=getAccount(user, userList), receiver=getAccount(self.request.cookies.get("receiver"), userList))
         
-        print(getAccount(self.request.cookies.get("receiver"), userList))
-        print(message.getReceiver())
         message.put()
         
         self.redirect("/messcenter?user=" + user)
