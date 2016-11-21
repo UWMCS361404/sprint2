@@ -9,6 +9,7 @@ from google.appengine.ext import ndb
 from user import *
 from util import *
 from message import *
+from questionanswer import *
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -82,28 +83,46 @@ class Chat(webapp2.RequestHandler):
         self.response.write(template.render(template_values))
         
     def post(self):
-        user = self.request.cookies.get("CurrentUser")
-
-        message = Message(time=datetime.datetime.now(), content=self.request.get("message"), sender=getAccount(user, userList), receiver=getAccount(self.request.cookies.get("receiver"), userList))
         
-        message.put()
-        
-        self.redirect("/messcenter?user=" + user)
+        if self.request.get("message").strip() == "":
+            user = self.request.cookies.get("CurrentUser")
+            self.redirect("/messcenter?user=" + user)
+    
+        else:
+            user = self.request.cookies.get("CurrentUser")
+    
+            message = Message(time=datetime.datetime.now(), content=self.request.get("message"), sender=getAccount(user, userList), receiver=getAccount(self.request.cookies.get("receiver"), userList))
+            message.put()
+            
+            self.redirect("/messcenter?user=" + user)
         
 class Faq(webapp2.RequestHandler):
     def get(self): 
         template = JINJA_ENVIRONMENT.get_template('faq.html')
         user = self.request.cookies.get("CurrentUser")
         
+        faqs = list(questionAnswer.query().order(questionAnswer.heading, -questionAnswer.heading))
+        
         template_values = {
-            "user": user            
+            "user": getAccount(user, userList),
+            "faqs": faqs
         }
         
         self.response.write(template.render(template_values))
         
     def post(self):
-        user = self.request.cookies.get("CurrentUser")
-        self.redirect("/messcenter?user=" + user)
+        
+        if self.request.get("heading") == "" or self.request.get("question") == "" or self.request.get("answer") == "":
+            user = self.request.cookies.get("CurrentUser")
+            self.redirect("/messcenter?user=" + user)
+            
+        else:
+            
+            qa = questionAnswer(heading=self.request.get("heading"), question=self.request.get("quesion"), answer=self.request.get("answer"))
+            qa.put()
+            
+            user = self.request.cookies.get("CurrentUser")
+            self.redirect("/messcenter?user=" + user)
         
 
 userList = parseTxt("accounts.csv")

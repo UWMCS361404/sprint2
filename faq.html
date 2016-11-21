@@ -2,14 +2,40 @@
 <html>    
 <head>
 <link rel="stylesheet" type="text/css" href="style/style.css">
-<title>FAQit FAQ</title>
+<title>FAQit Frequently Asked Questions</title>
 </head>
 
 <body>
 <h1>FAQit FAQ</h1>
 
-<form action"faq" method="post">
-    <input type ="submit" value ="Go To Message Center">
+{% for faq in faqs %}
+<ol>
+    <div class="qaSubsection">
+        
+        {{faq.getHeading()}}
+        <div class="question">
+            {{faq.getQuestion()}}
+        </div><div class="answer">
+            {{faq.getAnswer()}}
+        </div>
+    </div>
+
+{% endfor %}
+
+<form action="faq" method="post">
+
+    {% if user.getaType() == "i" %}
+        Enter the heading for the FAQ item:<br>
+        <input type="text" name="heading" placeholder="Header"><br>
+        
+        Enter the question for the new FAQ item:<br>
+        <textarea  name="question" placeholder="Add new question"></textarea><br>
+
+        Enter the answer for the new FAQ item:<br>
+        <textarea name="answer" placeholder="Add new answer"></textarea><br>
+        <input type="submit" value="Submit FAQ">
+    {% endif %}
+    <input type="submit" value ="Go Back To Message Center">
 </form>
 
 </body>

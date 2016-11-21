@@ -1,6 +1,7 @@
 body{
 	background: lightgrey;
 	font-family: garamond;
+	font-size: 110%;
 }
 
 h1, h2, h3, h4, h5, h6{
@@ -14,9 +15,19 @@ p{
 }
 
 hr {
-	height: 1px;
+	height: 2px;
 	border: 0;
 	border-top: 1px solid black;
+  margin: 0px 0px 0px 0px;
+}
+
+ol{
+
+}
+
+.login{
+    font-family: helvetica;
+    text-align: center;
 }
 
 .chatArea{
@@ -60,6 +71,41 @@ hr {
 	font-size: 80%;
 }
 
+.question{
+  background-color: gold;
+	text-align: left;
+	text-indent: 2ch;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.answer{
+  background-color: skyblue;
+	text-align: left;
+	text-indent: 2ch;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+
+.qaSubsection{
+	background-color: lightgreen;
+	text-align: center;
+	width: 80%;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-top: 1px solid black;
+}
+
+div.question:before{
+	content: "Q: ";
+}
+
+div.answer:before{
+	content: "A: ";
+}
+
 div.iMessage + div.iMessage{
 	clear: right;
 	margin-top: 1%;
@@ -67,7 +113,7 @@ div.iMessage + div.iMessage{
 }
 
 div.sMessage + div.sMessage{
-	clear: right;
+	clear: left;
 	margin-top: 1%;
 	margin-bottom: 1%;
 }
@@ -134,6 +180,35 @@ div.iMessage > div.messageMeta::-moz-selection{
 	background-color: black;
 }
 
+div.question::selection{
+  color: gold;
+  background-color: black;
+}
+
+div.answer::selection{
+  color: skyblue;
+  background-color: black;
+}
+
+div.qaSubsection::selection{
+	color: lightgreen;
+	background: black;
+}
+
+div.question::-moz-selection{
+  color: gold;
+  background-color: black;
+}
+
+div.answer::-moz-selection{
+  color: skyblue;
+  background-color: black;
+}
+
+div.qaSubsection::-moz-selection{
+	color: lightgreen;
+	background: black;
+}
 
 h1::selection, h2::selection, h3::selection, h4::selection, h5::selection, h6::selection{
 	color: lightgrey;
@@ -141,6 +216,16 @@ h1::selection, h2::selection, h3::selection, h4::selection, h5::selection, h6::s
 }
 
 h1::-moz-selection, h2::-moz-selection, h3::-moz-selection, h4::-moz-selection, h5::-moz-selection, h6::-moz-selection{
+	color: lightgrey;
+	background-color: black;
+}
+
+ol::selection{
+	color: lightgrey;
+	background-color: black;
+}
+
+li::selection{
 	color: lightgrey;
 	background-color: black;
 }
@@ -175,44 +260,12 @@ textarea::-moz-selection, form::-moz-selection{
 	background-color: black;
 }
 
-
-
-
-
-/*h1, h2, h3, h4, h5, h6{
-    font-family: helvetica;
-    text-align: center;
+ol::-moz-selection{
+	color: lightgrey;
+	background-color: black;
 }
 
-head{
-    color: white;
+li::-moz-selection{
+	color: lightgrey;
+	background-color: black;
 }
-
-body{
-  background-color: lightgrey;
-}
-
-.Student{
-    background-color: yellow;
-    width: 300px;
-    border: 5px solid lightskyblue;
-    padding: 5px;
-    margin : 25px;
-}
-
-.Instructor{
-    float: right;
-    padding: 0px 100px 0px 0px;
-    text-align: right;
-    background-color: lightskyblue;
-    width: 300px;
-    border: 5px solid yellow;
-    padding: 5px;
-    margin : 25px;
-}
-
-.timestamp{
-    background-color: red;
-}
-*/
-

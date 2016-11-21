@@ -6,7 +6,7 @@ class Question(ndb.Model):
     topic = Message()
     answered = ndb.BooleanProperty();
     messages = []
-    lec = "CS361" # Hard coded for now
+    lec = ndb.StringProperty # Hard coded for now
     
     def setOwner(self, owner):
         self.owner = owner
