@@ -5,6 +5,7 @@ import time
 import datetime
 import calendar
 
+from question import *
 from google.appengine.ext import ndb
 from user import *
 from util import *
@@ -17,30 +18,36 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 autoescape=True)
 
 class Login(webapp2.RequestHandler):
-    error = ""
     def get(self):
+        
+        error = ""
+        
         uNm = self.request.cookies.get("CurrentUser")
+        uPwd = self.request.get('uPass')
+        
+        if self.request.cookies.get("CurrentUser") == None:
+            uNm = self.request.get('uName')
+        
         if uNm == "":
             template = JINJA_ENVIRONMENT.get_template('login.html')
             template_values = {
-                "user": uNm,
-                "error": error,
+                #"user": uNm,
+                "error": error
             }
             self.response.write(template.render(template_values))
 
-
         else:
-            if (getAccount(uNm).aType == 's'):
+            if (getAccount(uNm, userList).aType == 's'):
                 self.redirect('/studentcenter')
             else:
                 self.redirect('/instructorcenter')
 
     def post(self):
-        uNm = self.request.get('uName')
-        uPwd = self.request.get('uPass')
-
         validAcc = False
-
+        
+        uNm = self.request.get("uName")
+        uPwd = self.request.get('uPass')
+        
         for item in userList:
             if item.getName() == uNm and item.getPwd() == uPwd:
                 validAcc = True
@@ -48,9 +55,8 @@ class Login(webapp2.RequestHandler):
             self.redirect("/")
 
         if validAcc == True:
-            #self.response.set_cookie('name', name, path='/')
             self.response.set_cookie("CurrentUser", uNm, max_age=360, path="/")
-            if (getAccount(uNm).aType == 's'):
+            if (getAccount(uNm, userList).getaType() == 's'):
                 self.redirect("/studentcenter")
             else:
                 self.redirect("/instructorcenter")
@@ -77,11 +83,11 @@ class MessCenter(webapp2.RequestHandler):
 
 class InstructorCenter(webapp2.RequestHandler):
 
-    QL = Question.query(Question.lec==getAccount(uNm).lec).fetch()
+    #QL = Question.query(Question.lec==getAccount(uNm).lec).fetch()
 
     def get(self):
         uNm = self.request.cookies.get('CurrentUser')
-        QL = Question.query(Question.lec==getAccount(uNm).lec).fetch()
+        #QL = Question.query(Question.lec==getAccount(uNm).lec).fetch()
         template = JINJA_ENVIRONMENT.get_template('instructorcenter.html')
         uNm = self.request.get("CurrentUser")
         template_values = {
@@ -188,10 +194,9 @@ userList = parseTxt("accounts.csv")
 
 app = webapp2.WSGIApplication([
 	('/', Login),
-    ('/messcenter', MessCenter)
-#    ('/studentcenter'), StudentCenter),
-    ('/instructorcenter'), InstructorCenter,
+    ('/messcenter', MessCenter),
+    ('/instructorcenter', InstructorCenter),
 	('/test', Test),
 	('/chat', Chat),
     ('/faq', Faq)
-], debug=True)
+])
