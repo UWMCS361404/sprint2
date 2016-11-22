@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<title>Student Center</title>
+	<link rel="stylesheet" type="text/css" href="unified.css">
+</head>
+
+<body>
+<img src="UWM_D2L_banner_960w.png" alt="UWM">
+<h1>
+Student Center
+</h1>
+    <h1>Welcome {{current}} </h1>
+<div id="previous_questions">
+Your Previously asked questions:
+</div>
+
+<div id="list_of_questions">
+	<table>
+	<tr>
+	<th>Time | </td>
+	<th>Instructor | </td>
+	<th>Answered | </td>
+    <th>Question </td>
+	
+	</tr>
+	{{% for item in QuestionList %}}
+	<tr>
+	<td>{{item.time}}</td>
+	<td>{{item.name}}</td>
+    {{% if item.isAnswered == True %}}
+	<td><a href="chat.html">Yes</a></td>
+    {{% else %}}
+        <td> No </td>
+    {{% endif %}}
+	<td>{{item.question}}</td>
+	</tr>
+	{{% endfor %}}
+
+	</table>
+</div>
+
+<div id="new_question">
+Ask a new question:
+<br>
+<textarea rows="5" cols="48">
+Ask a new question(Please check the F.A.Q first)
+</textarea>
+<br>
+
+	                    <input name="q" type="submit" value= "Ask a question"/>
+	                
+<br>
+Regarding what class?
+<br>
+<select>
+	
+	<option value="CS361">CS361 Introduction To Software Engineering</option>
+	
+</select>
+<br>
+</div>
+
+<div id="gotoFAQ">
+	<td><a href="faqq.html">Go to F.A.Q</a></td>
+</div>
+<form action = "instlogin.html">
+	                    <input type="submit" value= "Logout"/>
+	                </form>   
+</body>
+</html>
