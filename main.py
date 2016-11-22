@@ -192,5 +192,6 @@ app = webapp2.WSGIApplication([
 #    ('/studentcenter'), StudentCenter),
     ('/instructorcenter'), InstructorCenter,
 	('/test', Test),
-	('/chat', Chat)
+	('/chat', Chat),
+    ('/faq', Faq)
 ], debug=True)
