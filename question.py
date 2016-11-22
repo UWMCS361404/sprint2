@@ -1,4 +1,5 @@
 from user import User
+from message import *
 from google.appengine.ext import ndb
 
 class Question(ndb.Model):
@@ -6,7 +7,7 @@ class Question(ndb.Model):
     topic = Message()
     answered = ndb.BooleanProperty();
     messages = []
-    lec = ndb.StringProperty # Hard coded for now
+    lec = ndb.StringProperty() # Hard coded for now
     
     def setOwner(self, owner):
         self.owner = owner

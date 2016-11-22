@@ -27,6 +27,12 @@ def parseTxt(name):
     return result
 
 def getAccount(userName, uList):
+    if userName == None:
+        print("name is None")
+        
+    if len(uList) == 0:
+        print("name is None")
+
     for i in range(len(uList)):
         if userName.strip() == uList[i].getName().strip():
             return uList[i]

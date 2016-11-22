@@ -4,6 +4,7 @@ class User(ndb.Model):
     name = ndb.StringProperty()
     pwd = ndb.StringProperty()
     aType = ndb.StringProperty()
+    lec = ndb.StringProperty()
 
     def setName(self, name):
         self.name = name
